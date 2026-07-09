@@ -1,0 +1,58 @@
+import requests
+from datetime import datetime, timedelta
+
+apiKey = "DEMO_KEY"
+
+startDate = (datetime.utcnow() - timedelta(days=30)).strftime("%Y-%m-%d")
+baseURL = "https://api.nasa.gov/DONKI"
+
+flareResponse = requests.get(
+    f"{baseURL}/FLR?startDate={startDate}&api_key={apiKey}"
+).json()
+
+cmeResponse = requests.get(
+    f"{baseURL}/CME?startDate={startDate}&api_key={apiKey}"
+).json()
+
+stormResponse = requests.get(
+    f"{baseURL}/GST?startDate={startDate}&api_key={apiKey}"
+).json()
+
+if flareResponse:
+    flare = flareResponse[-1]
+    flareDetails = {
+        "Class": flare.get("classType", "N/A"),
+        "Peak Time": flare.get("peakTime", "N/A"),
+        "Source": flare.get("sourceLocation", "N/A"),
+        "Active Region": flare.get("activeRegionNum", "N/A"),
+        "Instruments": ", ".join(
+            instrument["displayName"]
+            for instrument in flare.get("instruments", [])
+        ) or "N/A"
+    }
+else:
+    flareDetails = {}
+
+if cmeResponse:
+    cme = cmeResponse[-1]
+    cmeDetails = {
+        "Start Time": cme.get("startTime", "N/A"),
+        "Source": cme.get("sourceLocation", "N/A"),
+        "Active Region": cme.get("activeRegionNum", "N/A")
+    }
+else:
+    cmeDetails = {}
+
+if stormResponse:
+    storm = stormResponse[-1]
+    stormDetails = {
+        "Start Time": storm.get("startTime", "N/A"),
+        "Kp Index": storm["allKpIndex"][-1].get("kpIndex", "N/A")
+        if storm.get("allKpIndex") else "N/A"
+    }
+else:
+    stormDetails = {}
+
+print(flareDetails["Class"])
+print(cmeDetails["Source"])
+print(stormDetails["Kp Index"])

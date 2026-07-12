@@ -1,3 +1,8 @@
+"""
+Mission Launches Module
+Fetches various information on future mission launches
+"""
+
 import requests
 
 url = "https://ll.thespacedevs.com/2.3.0/launches/upcoming/?limit=5"
@@ -30,4 +35,4 @@ else:
         "Image": launchData["image"]
     }
 
-print(missionDetails["Image"])
+# print(missionDetails["Image"])

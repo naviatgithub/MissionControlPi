@@ -1,3 +1,11 @@
+"""
+Space Weather Module
+
+Fetches recent space weather data
+makes use of NASA's DONKI API
+weather data includes solar flares, coronal mass ejections, and geomagnetic storms
+"""
+
 import requests
 from datetime import datetime, timedelta
 
@@ -53,6 +61,6 @@ if stormResponse:
 else:
     stormDetails = {}
 
-print(flareDetails["Class"])
-print(cmeDetails["Source"])
-print(stormDetails["Kp Index"])
+# print(flareDetails["Class"])
+# print(cmeDetails["Source"])
+# print(stormDetails["Kp Index"])

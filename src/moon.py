@@ -1,6 +1,12 @@
-"""Unlike the other modules, this file will not use additional API requests
+"""
+Moon Phase Module
+
+Calculates the current moon phase and illumination percentage
+
+Unlike the other modules, this file will not use additional API requests
 I decided to do this because it is quite easy to simply use formulas to calculate the moon phases
-that way the user does not have to worry as much about API limits and other memory related issues"""
+that way the user does not have to worry as much about API limits and other memory related issues
+"""
 
 from datetime import datetime, timezone
 import math
@@ -41,11 +47,10 @@ else:
 
 
 illumination = (1 - math.cos(2 * math.pi - moonAge / 29.53058)) / 2
-print(illumination)
+# print(illumination)
 
 moonInfo = {
     "Phase" : phase,
     "Age" : round(moonAge, 2),
     "Illumination" : f"{round(illumination * 100, 1)}%"
 }
-

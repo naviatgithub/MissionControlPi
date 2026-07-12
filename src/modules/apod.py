@@ -23,5 +23,5 @@ apodDetails = {
 if apodDetails["Media Type"] == "image":
     image = requests.get(apodDetails["Image URL"]).content
 
-    with open("apod.jpg", "wb") as f:
+    with open("src/static/images/apod.jpg", "wb") as f:
         f.write(image)

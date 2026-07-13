@@ -6,17 +6,25 @@ In the future will display location on world map
 
 import requests
 
+
 url = "http://api.open-notify.org/iss-now.json"
 
 response = requests.get(url).json()
 
-latitude = response["iss_position"]["latitude"]
-longitude = response["iss_position"]["longitude"]
 
-# print("lat:", latitude)
-# print("long:", longitude)
+if "iss_position" in response:
 
-issData = {
-    "lat": latitude,
-    "long": longitude
-}
+    latitude = response["iss_position"]["latitude"]
+    longitude = response["iss_position"]["longitude"]
+
+    issDetails = {
+        "lat": latitude,
+        "long": longitude
+    }
+
+else:
+
+    issDetails = {
+        "lat": "N/A",
+        "long": "N/A"
+    }

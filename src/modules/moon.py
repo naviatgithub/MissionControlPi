@@ -49,7 +49,7 @@ else:
 illumination = (1 - math.cos(2 * math.pi - moonAge / 29.53058)) / 2
 # print(illumination)
 
-moonInfo = {
+moonDetails = {
     "Phase" : phase,
     "Age" : round(moonAge, 2),
     "Illumination" : f"{round(illumination * 100, 1)}%"
